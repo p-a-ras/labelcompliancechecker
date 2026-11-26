@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f5f7fb">
+  <title>Packaged-Label Compliance Checker</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand" href="#" aria-label="Packaged-Label Compliance Checker home">
+      <span class="brand-mark" aria-hidden="true">PC</span>
+      <span>LabelCheck <span class="brand-light">India</span></span>
+    </a>
+    <span class="topbar-note">Legal Metrology · Packaged Commodities Rules, 2011</span>
+  </header>
+
+  <main class="page-shell">
+    <section class="hero">
+      <p class="eyebrow">PACKAGED COMMODITY REVIEW</p>
+      <h1>Packaged-Label Compliance Checker</h1>
+      <p class="hero-copy">Review product label declarations against India’s packaged commodities requirements.</p>
+    </section>
+
+    <section class="panel upload-panel" aria-labelledby="upload-heading">
+      <div class="section-heading">
+        <div><p class="step-label">STEP 1</p><h2 id="upload-heading">Add product label images</h2></div>
+        <span class="file-count" id="file-count">0 images</span>
+      </div>
+      <div class="dropzone" id="dropzone" tabindex="0" role="button" aria-label="Choose or drop JPG and PNG images">
+        <input id="image-input" class="visually-hidden" type="file" accept="image/jpeg,image/png,.jpg,.jpeg,.png" multiple>
+        <span class="upload-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none"><path d="M12 16V4m0 0L7.5 8.5M12 4l4.5 4.5M5 14.5v4A1.5 1.5 0 0 0 6.5 20h11a1.5 1.5 0 0 0 1.5-1.5v-4" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </span>
+        <strong>Drop your label images here</strong>
+        <span class="dropzone-hint">or <button class="text-button" id="browse-button" type="button">browse files</button> from your device</span>
+        <span class="format-hint">JPG or PNG · Multiple files supported</span>
+      </div>
+      <div class="preview-heading" id="preview-heading" hidden>
+        <h3>Selected images</h3><button class="text-button clear-button" id="clear-button" type="button">Remove all</button>
+      </div>
+      <div class="preview-grid" id="preview-grid" aria-live="polite"></div>
+      <p class="upload-error" id="upload-error" role="status" hidden></p>
+      <div class="run-row">
+        <div class="run-caption"><span class="status-dot" aria-hidden="true"></span><span id="run-caption">Add images to get started</span></div>
+        <button class="primary-button" id="run-button" type="button" disabled>
+          <span>Run Compliance Check</span><span aria-hidden="true">→</span>
+        </button>
+      </div>
+      <div class="progress-track" role="progressbar" aria-label="Compliance check progress" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"><span></span></div>
+    </section>
+
+    <section class="metrics-grid" aria-label="Compliance metrics">
+      <article class="metric-card"><span class="metric-icon metric-blue" aria-hidden="true">▧</span><div><p>Total labels</p><strong>—</strong><span>Images reviewed</span></div></article>
+      <article class="metric-card"><span class="metric-icon metric-green" aria-hidden="true">✓</span><div><p>Compliant</p><strong>—</strong><span>Meet all checks</span></div></article>
+      <article class="metric-card"><span class="metric-icon metric-red" aria-hidden="true">!</span><div><p>Non-compliant</p><strong>—</strong><span>Require attention</span></div></article>
+      <article class="metric-card"><span class="metric-icon metric-amber" aria-hidden="true">◷</span><div><p>Needs review</p><strong>—</strong><span>Check manually</span></div></article>
+    </section>
+
+    <section class="panel results-panel" aria-labelledby="results-heading">
+      <div class="results-heading">
+        <div><p class="step-label">STEP 2</p><h2 id="results-heading">Compliance results</h2><p class="section-copy">Field-level findings for each uploaded label.</p></div>
+        <div class="download-actions"><button class="secondary-button" type="button" disabled>↓ <span>Download report</span></button><button class="icon-button" type="button" aria-label="More download options" disabled>•••</button></div>
+      </div>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th scope="col">IMAGE NAME</th><th scope="col">OCR TEXT &amp; CONFIDENCE</th><th scope="col">OVERALL VERDICT</th><th scope="col"><span class="visually-hidden">Details</span></th></tr></thead>
+          <tbody id="results-body">
+            <tr class="result-row"><td><div class="image-cell"><span class="mini-thumb thumb-one" aria-hidden="true"><span>ORGANIC<br>TEA</span></span><span><strong>green-tea-pack.jpg</strong><small>Front label</small></span></div></td><td><div class="field-chips"><span>Net qty · 100 g</span><span>MRP · ₹180</span><span>Manufacturer · 2</span><span class="more-chip">+2</span></div></td><td><span class="badge badge-compliant"><i></i> COMPLIANT</span></td><td><details class="finding-details"><summary aria-label="Show findings"></summary><div class="finding-popover"><strong>Field-level findings</strong><p>All required declarations found.</p><ul><li><span class="finding-ok">✓</span> Net quantity declared</li><li><span class="finding-ok">✓</span> MRP inclusive of all taxes</li><li><span class="finding-ok">✓</span> Manufacturer details present</li></ul></div></details></td></tr>
+            <tr class="result-row"><td><div class="image-cell"><span class="mini-thumb thumb-two" aria-hidden="true"><span>DAILY<br>OATS</span></span><span><strong>oats-carton.png</strong><small>Front label</small></span></div></td><td><div class="field-chips"><span>Net qty · 500 g</span><span>MRP · ₹—</span><span>Manufacturer · 1</span><span class="more-chip">+1</span></div></td><td><span class="badge badge-noncompliant"><i></i> NON-COMPLIANT</span></td><td><details class="finding-details"><summary aria-label="Show findings"></summary><div class="finding-popover"><strong>Field-level findings</strong><p>One required declaration appears to be missing.</p><ul><li><span class="finding-ok">✓</span> Net quantity declared</li><li><span class="finding-no">×</span> Maximum retail price not detected</li><li><span class="finding-ok">✓</span> Manufacturer details present</li></ul></div></details></td></tr>
+            <tr class="result-row"><td><div class="image-cell"><span class="mini-thumb thumb-three" aria-hidden="true"><span>PURE<br>HONEY</span></span><span><strong>honey-jar-label.jpg</strong><small>Wrap label</small></span></div></td><td><div class="field-chips"><span>Net qty · 250 g</span><span>MRP · ₹320</span><span>Manufacturer · —</span><span class="more-chip">+1</span></div></td><td><span class="badge badge-review"><i></i> NEEDS REVIEW</span></td><td><details class="finding-details"><summary aria-label="Show findings"></summary><div class="finding-popover"><strong>Field-level findings</strong><p>Some details need a manual check.</p><ul><li><span class="finding-ok">✓</span> Net quantity declared</li><li><span class="finding-ok">✓</span> MRP detected</li><li><span class="finding-warn">!</span> Manufacturer address needs review</li></ul></div></details></td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="table-footer"><span>Showing sample results</span><span>Expand a row to view field-level findings</span></div>
+    </section>
+
+    <footer class="page-footer"><span>Packaged-Label Compliance Checker</span><span>For guidance only · Verify against applicable rules</span></footer>
+  </main>
+  <script src="https://cdn.jsdelivr.net/npm/tesseract.js@5/dist/tesseract.min.js"></script>
+  <script src="ocr.js"></script>
+  <script src="rules.js"></script>
+  <script src="report.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
