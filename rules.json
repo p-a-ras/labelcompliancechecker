@@ -1,1 +1,72 @@
-{}
+{
+  "_note": "These draft checks must be verified against the official Legal Metrology (Packaged Commodities) Rules, 2011 text and applicable amendments before use.",
+  "confidenceThreshold": 45,
+  "rules": [
+    {
+      "id": "commodity-name",
+      "field": "commodityName",
+      "required": true,
+      "pattern": ".+",
+      "errorMessage": "Commodity name was not detected.",
+      "reference": "Legal Metrology (Packaged Commodities) Rules, 2011, Rule 6(1)(a)"
+    },
+    {
+      "id": "net-quantity",
+      "field": "netQuantity",
+      "required": true,
+      "pattern": "^\\s*(?:net\\s*(?:qty|quantity)\\s*[:.-]?\\s*)?\\d+(?:[.,]\\d+)?\\s*(?:mg|g|kg|ml|cl|l|n|pieces?)\\s*$",
+      "errorMessage": "Net quantity must contain a numeric value and a supported unit (g, kg, mg, ml, L, cl, N, or pieces).",
+      "reference": "Legal Metrology (Packaged Commodities) Rules, 2011, Rule 6(1)(d)"
+    },
+    {
+      "id": "mrp",
+      "field": "mrp",
+      "required": true,
+      "pattern": "^(?:(?:m\\s*\\.?\\s*r\\s*\\.?\\s*p\\.?|maximum\\s*retail\\s*price)\\s*[:.-]?\\s*)?(?:(?:rs\\.?|₹)\\s*)?\\d+(?:[,.]\\d{1,2})?(?:\\s*\\/-)?$",
+      "errorMessage": "Maximum retail price must contain a numeric amount.",
+      "reference": "Legal Metrology (Packaged Commodities) Rules, 2011, Rule 6(1)(e)"
+    },
+    {
+      "id": "manufacturer-packer-importer",
+      "field": "manufacturerPackerImporter",
+      "required": true,
+      "pattern": "^(?=.*\\b(?:manufactur(?:er|ed\\s*by)|packer|packed\\s*by|importer|imported\\s*by)\\b).+$",
+      "flags": "i",
+      "errorMessage": "Manufacturer, packer, or importer name and address were not detected.",
+      "reference": "Legal Metrology (Packaged Commodities) Rules, 2011, Rule 6(1)(a) and Rule 6(1)(b)"
+    },
+    {
+      "id": "postal-pin",
+      "field": "manufacturerPackerImporter",
+      "required": true,
+      "pattern": "(?:^|\\D)\\d{6}(?:\\D|$)",
+      "errorMessage": "A 6-digit PIN code was not detected in the manufacturer, packer, or importer address.",
+      "reference": "Legal Metrology (Packaged Commodities) Rules, 2011, Rule 6(1)(a) and Rule 6(1)(b)"
+    },
+    {
+      "id": "manufacture-packing-import-date",
+      "field": "manufacturePackingImportDate",
+      "required": true,
+      "pattern": "^(?:0[1-9]|1[0-2])\\/\\d{4}$",
+      "errorMessage": "Manufacture, packing, or import date must be in MM/YYYY form.",
+      "reference": "Legal Metrology (Packaged Commodities) Rules, 2011, Rule 6(1)(d)"
+    },
+    {
+      "id": "consumer-care",
+      "field": "consumerCare",
+      "required": true,
+      "pattern": "(?:\\b[\\w.+-]+@[\\w.-]+\\.[a-z]{2,}\\b|\\b\\d[\\d\\s()+-]{8,}\\d\\b|.{8,})",
+      "flags": "i",
+      "errorMessage": "Consumer care contact details were not detected.",
+      "reference": "Legal Metrology (Packaged Commodities) Rules, 2011, Rule 6(2)"
+    },
+    {
+      "id": "country-of-origin",
+      "field": "countryOfOrigin",
+      "required": true,
+      "pattern": ".+",
+      "errorMessage": "Country of origin was not detected.",
+      "reference": "Legal Metrology (Packaged Commodities) Rules, 2011, Rule 6(1)(aa)"
+    }
+  ]
+}

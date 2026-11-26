@@ -23,6 +23,18 @@
       <p class="hero-copy">Review product label declarations against India’s packaged commodities requirements.</p>
     </section>
 
+    <section class="panel how-panel" aria-labelledby="how-heading">
+      <p class="step-label">PIPELINE</p><h2 id="how-heading">How it works</h2>
+      <ol class="pipeline-list">
+        <li><b>Upload</b><span>Add JPG or PNG label images.</span></li>
+        <li><b>OCR</b><span>Tesseract reads the label text in your browser.</span></li>
+        <li><b>Regex extraction</b><span>Patterns identify declared fields from OCR text.</span></li>
+        <li><b>Rule engine</b><span>Configured rules check field presence and format.</span></li>
+        <li><b>Verdict</b><span>Findings summarize checks and OCR confidence.</span></li>
+        <li><b>Report</b><span>Download results or open a printable summary.</span></li>
+      </ol>
+    </section>
+
     <section class="panel upload-panel" aria-labelledby="upload-heading">
       <div class="section-heading">
         <div><p class="step-label">STEP 1</p><h2 id="upload-heading">Add product label images</h2></div>
@@ -61,7 +73,7 @@
     <section class="panel results-panel" aria-labelledby="results-heading">
       <div class="results-heading">
         <div><p class="step-label">STEP 2</p><h2 id="results-heading">Compliance results</h2><p class="section-copy">Field-level findings for each uploaded label.</p></div>
-        <div class="download-actions"><button class="secondary-button" type="button" disabled>↓ <span>Download report</span></button><button class="icon-button" type="button" aria-label="More download options" disabled>•••</button></div>
+        <div class="download-actions"><button class="secondary-button" id="download-csv" type="button">↓ <span>Download CSV</span></button><button class="secondary-button" id="download-json" type="button">↓ <span>Download JSON</span></button><button class="secondary-button" id="print-report" type="button">Print summary</button></div>
       </div>
       <div class="table-wrap">
         <table>

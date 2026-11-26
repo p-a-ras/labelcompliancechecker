@@ -1,0 +1,3 @@
+image_name,commodityName,netQuantity,mrp,manufacturerPackerImporter,manufacturePackingImportDate,consumerCare,countryOfOrigin,true_verdict
+green-tea-pack.jpg,Green Tea,100 g,MRP Rs. 180/-,Leaf Foods Pune 411001,01/2025,9876543210 care@example.in,India,COMPLIANT
+oats-carton.png,Daily Oats,500 g,MRP Rs. 220/-,Grain House Delhi 110001,02/2025,18001234567,India,NON-COMPLIANT

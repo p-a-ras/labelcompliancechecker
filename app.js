@@ -18,6 +18,7 @@ const resultFooter = document.querySelector(".table-footer span:first-child");
 
 let selectedFiles = [];
 let isRunning = false;
+let latestResults = [];
 
 function isSupportedImage(file) {
   return ["image/jpeg", "image/png"].includes(file.type) || /\.(jpe?g|png)$/i.test(file.name);
@@ -72,8 +73,9 @@ function makeCell(content, className) {
 }
 
 function renderResults(results) {
+  latestResults = results.map((item) => ({ ...item, fields: extractFields(item.rawText), verdict: "NEEDS REVIEW", findings: [] }));
   resultsBody.replaceChildren();
-  results.forEach(({ file, rawText, confidence, error }) => {
+  latestResults.forEach(({ file, rawText, confidence, error, fields }) => {
     const row = document.createElement("tr");
     row.className = "result-row";
 
@@ -90,13 +92,30 @@ function renderResults(results) {
 
     const ocrCell = document.createElement("div");
     ocrCell.className = "ocr-cell";
+    const fieldList = document.createElement("div");
+    fieldList.className = "extracted-fields";
+    Object.entries({
+      "Commodity": fields.commodityName,
+      "Net quantity": fields.netQuantity,
+      "MRP": fields.mrp,
+      "Manufacturer / packer / importer": fields.manufacturerPackerImporter,
+      "Mfg / packing / import date": fields.manufacturePackingImportDate,
+      "Consumer care": fields.consumerCare,
+      "Country of origin": fields.countryOfOrigin
+    }).forEach(([label, value]) => {
+      const line = document.createElement("span");
+      const fieldLabel = document.createElement("b");
+      fieldLabel.textContent = `${label}: `;
+      line.append(fieldLabel, document.createTextNode(value || "Not detected"));
+      fieldList.append(line);
+    });
     const confidenceLine = document.createElement("span");
     confidenceLine.className = "ocr-confidence";
     confidenceLine.textContent = error ? "Unreadable image · 0% confidence" : `Confidence · ${confidence}%`;
     const snippet = document.createElement("pre");
     snippet.className = "ocr-snippet";
     snippet.textContent = rawText || (error ? "Could not read this image." : "No text detected.");
-    ocrCell.append(confidenceLine, snippet);
+    ocrCell.append(fieldList, confidenceLine, snippet);
     row.append(makeCell(ocrCell));
 
     const verdict = document.createElement("span");
@@ -186,3 +205,7 @@ runButton.addEventListener("click", async () => {
 });
 
 renderPreviews();
+
+document.getElementById("download-csv").addEventListener("click", () => LabelReport.exportCSV(latestResults));
+document.getElementById("download-json").addEventListener("click", () => LabelReport.exportJSON(latestResults));
+document.getElementById("print-report").addEventListener("click", () => LabelReport.openPrintReport(latestResults));
